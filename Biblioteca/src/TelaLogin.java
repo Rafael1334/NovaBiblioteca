@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class TelaLogin extends JFrame {
 
@@ -9,6 +10,7 @@ public class TelaLogin extends JFrame {
     private JPasswordField pwdSenha;
     private JButton btnLogin;
     private JPanel mainPanel;
+    private JPanel loginPanel;
     private CardLayout cardLayout;
     final static String LOGINPANEL = "Tela Login";
     final static String PRINCIPALPANEL = "Tela Principal";
@@ -30,7 +32,7 @@ public class TelaLogin extends JFrame {
         mainPanel = new JPanel(cardLayout);
 
         //Panel Login
-        JPanel loginPanel = new JPanel(null);
+        loginPanel = new JPanel(null);
 
         //Labels
         JLabel lblLogin = new JLabel("Login");
@@ -78,9 +80,7 @@ public class TelaLogin extends JFrame {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                txtUsuario.setText("");
-                pwdSenha.setText("");
-                cardLayout.show(mainPanel, PRINCIPALPANEL);
+                getLogin();
             }
         });
 
@@ -90,6 +90,26 @@ public class TelaLogin extends JFrame {
     //Change telas
     public void trocarTela(String nomeTela){
         cardLayout.show(mainPanel, nomeTela);
+    }
+
+    //Login
+    public void getLogin(){
+        String usuario = txtUsuario.getText().trim();
+        String senha = String.valueOf(pwdSenha.getPassword());
+
+        if(usuario.isEmpty() || senha.isEmpty()){
+            JOptionPane.showMessageDialog( loginPanel,"Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Login login = new Login(usuario, senha);
+
+        System.out.println("Usuario: " + usuario + "    Senha: " + senha + "    " + login); // --------> Tirar
+
+        txtUsuario.setText("");
+        pwdSenha.setText("");
+
+        cardLayout.show(mainPanel, PRINCIPALPANEL);
     }
 
     public static void main(String[] args) {

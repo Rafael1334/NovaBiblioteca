@@ -9,6 +9,7 @@ public class TelaPrincipal extends JPanel {
     private JButton btnAluno;
     private JButton btnLivro;
     private JButton btnEmprestimo;
+    private JButton btnLogOut;
 
 
     public TelaPrincipal(TelaLogin telaLogin) {
@@ -34,6 +35,10 @@ public class TelaPrincipal extends JPanel {
         btnEmprestimo.setBounds(550, 350, 300, 200);
         btnEmprestimo.setFont(new Font("Arial", Font.BOLD, 24));
         add(btnEmprestimo);
+
+        btnLogOut = new JButton("Sair");
+        btnLogOut.setBounds(50, 600, 100, 27);
+        add(btnLogOut);
 
         //Action Buttons
         btnFuncionario.addActionListener(new ActionListener() {
@@ -61,6 +66,13 @@ public class TelaPrincipal extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 telaLogin.trocarTela(TelaLogin.EMPRESTIMOPANEL);
+            }
+        });
+
+        btnLogOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                telaLogin.trocarTela(TelaLogin.LOGINPANEL);
             }
         });
 

@@ -77,6 +77,7 @@ public class TelaLivro extends JPanel {
         modelTable.addColumn("Código");
         modelTable.addColumn("Estante");
         modelTable.addColumn("Prateleira");
+        modelTable.addColumn("Cópias");
         modelTable.addColumn("Detalhes");
         tableLivro = new JTable(modelTable);
         JScrollPane sp = new JScrollPane(tableLivro);

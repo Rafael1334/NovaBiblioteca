@@ -62,9 +62,7 @@ public class TelaFuncionario extends JPanel {
 
         btnCadastrar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
+            public void actionPerformed(ActionEvent e) { cadastrarFuncionario(); }
         });
 
 
@@ -78,5 +76,78 @@ public class TelaFuncionario extends JPanel {
         sp.setBounds(50, 150, 980, 400);
         add(sp);
 
+    }
+
+    public void cadastrarFuncionario(){
+        JDialog dialog = new JDialog();
+        dialog.setSize(350, 400);
+        dialog.setLocationRelativeTo(this);
+
+        JPanel panelDialog = new JPanel();
+        panelDialog.setLayout(null);
+        dialog.add(panelDialog);
+
+        // Labels
+        JLabel lblFuncionario = new JLabel("Funcionário");
+        lblFuncionario.setBounds(120, 20, 200, 27);
+        lblFuncionario.setFont(new Font("Arial", Font.BOLD, 18));
+        panelDialog.add(lblFuncionario);
+
+        JLabel lblNomeFuncionario = new JLabel("Nome: ");
+        lblNomeFuncionario.setBounds(20, 100, 100, 27);
+        panelDialog.add(lblNomeFuncionario);
+
+        JLabel lblSenhaFuncionario = new JLabel("Senha: ");
+        lblSenhaFuncionario.setBounds(20, 150, 100, 27);
+        panelDialog.add(lblSenhaFuncionario);
+
+        // Text Field
+        JTextField txtNomeFuncionario = new JTextField();
+        txtNomeFuncionario.setBounds(80, 100, 200, 27);
+        panelDialog.add(txtNomeFuncionario);
+
+        // Password Field
+        JPasswordField pwdSenhaFuncionario = new JPasswordField();
+        pwdSenhaFuncionario.setBounds(80, 150, 200, 27);
+        panelDialog.add(pwdSenhaFuncionario);
+
+        // Button
+        JButton btnSalvar = new JButton("Salvar");
+        btnSalvar.setBounds(180, 300, 100, 27);
+        panelDialog.add(btnSalvar);
+
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.setBounds(20, 300, 100, 27);
+        panelDialog.add(btnVoltar);
+
+        // Action Button
+        btnSalvar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomeFuncionario = txtNomeFuncionario.getText().trim();
+                String senhaFuncionario = String.valueOf(pwdSenhaFuncionario.getPassword());
+
+                if(nomeFuncionario.isEmpty() || senhaFuncionario.isEmpty()){
+                    JOptionPane.showMessageDialog( panelDialog,"Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Funcionario funcionario = new Funcionario(nomeFuncionario, senhaFuncionario);
+
+                System.out.println("Nome Funcionário: " + nomeFuncionario + "    Senha: " + senhaFuncionario + "    " + funcionario); // --------> Tirar
+
+                txtNomeFuncionario.setText("");
+                pwdSenhaFuncionario.setText("");
+
+                dialog.dispose();
+            }
+        });
+
+        btnVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { dialog.dispose(); }
+        });
+
+        dialog.setVisible(true);
     }
 }
