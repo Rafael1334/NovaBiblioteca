@@ -6,10 +6,8 @@ public class Emprestimo {
     private String cgmAluno;
     private int idEmprestimo;
 
-    public Emprestimo(String nomeLivro, String codLivro, String nomeAluno, String cgmAluno){
-        this.nomeLivro = nomeLivro;
+    public Emprestimo(String codLivro, String cgmAluno){
         this.codLivro = codLivro;
-        this.nomeAluno = nomeAluno;
         this.cgmAluno = cgmAluno;
     }
 

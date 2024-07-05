@@ -6,15 +6,17 @@ public class Livro {
     private String codLivro;
     private String estanteLivro;
     private String prateleiraLivro;
+    private String copiasLivro;
     private int idLivro;
 
-    public Livro(String nomeLivro, String nomeAutor, String anoLivro, String codLivro, String estanteLivro, String prateleiraLivro){
+    public Livro(String nomeLivro, String nomeAutor, String anoLivro, String codLivro, String estanteLivro, String prateleiraLivro, String copiasLivro){
         this.nomeLivro = nomeLivro;
         this.nomeAutor = nomeAutor;
         this.anoLivro = anoLivro;
         this.codLivro = codLivro;
         this.estanteLivro = estanteLivro;
         this.prateleiraLivro = prateleiraLivro;
+        this.copiasLivro = copiasLivro;
     }
 
     public String getNomeLivro() {
@@ -40,6 +42,8 @@ public class Livro {
     public String getPrateleiraLivro() {
         return prateleiraLivro;
     }
+
+    public String getCopiasLivro() { return copiasLivro; }
 
     public int getIdLivro() {
         return idLivro;
@@ -67,6 +71,10 @@ public class Livro {
 
     public void setPrateleiraLivro(String prateleiraLivro) {
         this.prateleiraLivro = prateleiraLivro;
+    }
+
+    public void setCopiasLivro(String copiasLivro) {
+        this.copiasLivro = copiasLivro;
     }
 
     public void setIdLivro(int idLivro) {

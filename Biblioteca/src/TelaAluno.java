@@ -3,6 +3,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TelaAluno extends JPanel {
 
@@ -62,9 +64,7 @@ public class TelaAluno extends JPanel {
 
         btnCadastrar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
+            public void actionPerformed(ActionEvent e) { cadastrarAluno(); }
         });
 
 
@@ -79,5 +79,77 @@ public class TelaAluno extends JPanel {
         sp.setBounds(50, 150, 980, 400);
         add(sp);
 
+    }
+
+    public void cadastrarAluno(){
+        JDialog dialog = new JDialog();
+        dialog.setSize(350, 400);
+        dialog.setLocationRelativeTo(this);
+
+        JPanel panelDialog = new JPanel();
+        panelDialog.setLayout(null);
+        dialog.add(panelDialog);
+
+        // Labels
+        JLabel lblAluno = new JLabel("Aluno");
+        lblAluno.setBounds(150, 20, 200, 27);
+        lblAluno.setFont(new Font("Arial", Font.BOLD, 18));
+        panelDialog.add(lblAluno);
+
+        JLabel lblNomeAluno = new JLabel("Nome: ");
+        lblNomeAluno.setBounds(20, 100, 100, 27);
+        panelDialog.add(lblNomeAluno);
+
+        JLabel lblCgmAluno = new JLabel("CGM: ");
+        lblCgmAluno.setBounds(20, 150, 100, 27);
+        panelDialog.add(lblCgmAluno);
+
+        // Text Field
+        JTextField txtNomeAluno = new JTextField();
+        txtNomeAluno.setBounds(80, 100, 200, 27);
+        panelDialog.add(txtNomeAluno);
+
+        JTextField txtCgmAluno = new JtextFieldSomenteNumeros();
+        txtCgmAluno.setBounds(80, 150, 200, 27);
+        panelDialog.add(txtCgmAluno);
+
+        // Button
+        JButton btnSalvar = new JButton("Salvar");
+        btnSalvar.setBounds(180, 300, 100, 27);
+        panelDialog.add(btnSalvar);
+
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.setBounds(20, 300, 100, 27);
+        panelDialog.add(btnVoltar);
+
+        // Action Button
+        btnSalvar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomeAluno = txtNomeAluno.getText().trim();
+                String cgmAluno = txtCgmAluno.getText().trim();
+
+                if(nomeAluno.isEmpty() || cgmAluno.isEmpty()){
+                    JOptionPane.showMessageDialog( panelDialog,"Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Aluno aluno = new Aluno(nomeAluno, cgmAluno);
+
+                System.out.println("Nome Aluno: " + nomeAluno + "    CGM: " + cgmAluno + "    " + aluno); // --------> Tirar
+
+                txtNomeAluno.setText("");
+                txtCgmAluno.setText("");
+
+                dialog.dispose();
+            }
+        });
+
+        btnVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { dialog.dispose(); }
+        });
+
+        dialog.setVisible(true);
     }
 }

@@ -1,10 +1,10 @@
 public class Aluno {
 
     private String nomeAluno;
-    private int cmgAluno;
+    private String cmgAluno;
     private int idAluno;
 
-    public Aluno(String nomeAluno, int cmgAluno){
+    public Aluno(String nomeAluno, String cmgAluno){
         this.nomeAluno = nomeAluno;
         this.cmgAluno = cmgAluno;
     }
@@ -13,7 +13,7 @@ public class Aluno {
         return nomeAluno;
     }
 
-    public int getCmgAluno() {
+    public String getCmgAluno() {
         return cmgAluno;
     }
 
@@ -25,7 +25,7 @@ public class Aluno {
         this.nomeAluno = nomeAluno;
     }
 
-    public void setCmgAluno(int cmgAluno) {
+    public void setCmgAluno(String cmgAluno) {
         this.cmgAluno = cmgAluno;
     }
 

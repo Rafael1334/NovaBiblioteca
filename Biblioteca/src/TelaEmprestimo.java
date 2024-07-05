@@ -63,7 +63,7 @@ public class TelaEmprestimo extends JPanel {
         btnCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                realizarEmprestimo();
             }
         });
 
@@ -80,6 +80,97 @@ public class TelaEmprestimo extends JPanel {
         JScrollPane sp = new JScrollPane(tableEmprestimo);
         sp.setBounds(50, 150, 980, 400);
         add(sp);
+
+    }
+
+    public void realizarEmprestimo(){
+        JDialog dialog = new JDialog();
+        dialog.setSize(350, 400);
+        dialog.setLocationRelativeTo(this);
+
+        JPanel panelDialog = new JPanel();
+        panelDialog.setLayout(null);
+        dialog.add(panelDialog);
+
+        // Labels
+        JLabel lblEmprestimo = new JLabel("Empréstimo");
+        lblEmprestimo.setBounds(120, 20, 200, 27);
+        lblEmprestimo.setFont(new Font("Arial", Font.BOLD, 18));
+        panelDialog.add(lblEmprestimo);
+
+        JLabel lblCgmAluno = new JLabel("CGM: ");
+        lblCgmAluno.setBounds(20, 100, 100, 27);
+        panelDialog.add(lblCgmAluno);
+
+        JLabel lblNomeAluno = new JLabel("Nome: ");
+        lblNomeAluno.setBounds(20, 150, 100, 27);
+        panelDialog.add(lblNomeAluno);
+
+        JLabel lblCodigoLivro = new JLabel("Código: ");
+        lblCodigoLivro.setBounds(20, 200, 100, 27);
+        panelDialog.add(lblCodigoLivro);
+
+        JLabel lblNomeLivro = new JLabel("Livro: ");
+        lblNomeLivro.setBounds(20, 250, 100, 27);
+        panelDialog.add(lblNomeLivro);
+
+        // Text Field
+        JTextField txtCgmAluno = new JtextFieldSomenteNumeros();
+        txtCgmAluno.setBounds(80, 100, 200, 27);
+        panelDialog.add(txtCgmAluno);
+
+        JTextField txtNomeAluno = new JTextField();
+        txtNomeAluno.setBounds(80, 150, 200, 27);
+        txtNomeAluno.setEditable(false);
+        panelDialog.add(txtNomeAluno);
+
+        JTextField txtCodigoLivro = new JTextField();
+        txtCodigoLivro.setBounds(80, 200, 200, 27);
+        panelDialog.add(txtCodigoLivro);
+
+        JTextField txtNomeLivro = new JTextField();
+        txtNomeLivro.setBounds(80, 250, 200, 27);
+        txtNomeLivro.setEditable(false);
+        panelDialog.add(txtNomeLivro);
+
+        // Button
+        JButton btnSalvar = new JButton("Salvar");
+        btnSalvar.setBounds(180, 300, 100, 27);
+        panelDialog.add(btnSalvar);
+
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.setBounds(20, 300, 100, 27);
+        panelDialog.add(btnVoltar);
+
+        // Action Button
+        btnSalvar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cgmAluno = txtCgmAluno.getText().trim();
+                String codigoLivro = txtCodigoLivro.getText().trim();
+
+                if(codigoLivro.isEmpty() || cgmAluno.isEmpty()){
+                    JOptionPane.showMessageDialog( panelDialog,"Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Emprestimo emprestimo = new Emprestimo(codigoLivro, cgmAluno);
+
+                System.out.println("Código Livro: " + codigoLivro + "    CGM: " + cgmAluno + "    " + emprestimo); // --------> Tirar
+
+                txtNomeAluno.setText("");
+                txtCgmAluno.setText("");
+
+                dialog.dispose();
+            }
+        });
+
+        btnVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { dialog.dispose(); }
+        });
+
+        dialog.setVisible(true);
 
     }
 }
