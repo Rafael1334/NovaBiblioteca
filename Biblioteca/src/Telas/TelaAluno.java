@@ -1,24 +1,36 @@
+package Telas;
+
+import ABC.Aluno;
+import JFrameEx.JFrameEx;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TelaEmprestimo extends JPanel {
+public class TelaAluno extends JPanel {
 
     private JTextField txtPesquisar;
     private JButton btnPesquisar;
     private JButton btnVoltar;
     private JButton btnCadastrar;
-    private JTable tableEmprestimo;
+    private JTable tableAluno;
     private DefaultTableModel modelTable;
+    private JFrameEx frame;
 
-    public TelaEmprestimo(TelaLogin telaLogin) {
+    public TelaAluno(JFrameEx frame) {
+        this.frame = frame;
+        showLayout();
+
+    }
+
+    private void showLayout() {
         setLayout(null);
 
         // Labels
-        JLabel lblFuncionario = new JLabel("Empréstimo");
-        lblFuncionario.setBounds(470, 50, 200, 27);
+        JLabel lblFuncionario = new JLabel("ABC.Aluno");
+        lblFuncionario.setBounds(510, 50, 200, 27);
         lblFuncionario.setFont(new Font("Arial", Font.BOLD, 30));
         add(lblFuncionario);
 
@@ -56,34 +68,29 @@ public class TelaEmprestimo extends JPanel {
         btnVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                telaLogin.trocarTela(TelaLogin.PRINCIPALPANEL);
+
             }
         });
 
         btnCadastrar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                realizarEmprestimo();
-            }
+            public void actionPerformed(ActionEvent e) { cadastrarAluno(); }
         });
 
 
-        // Table Emprestimo
+        // Table Aluno
         modelTable = new DefaultTableModel();
         modelTable.addColumn("ID");
-        modelTable.addColumn("Livro");
-        modelTable.addColumn("Código");
-        modelTable.addColumn("Aluno");
+        modelTable.addColumn("ABC.Aluno");
         modelTable.addColumn("CGM");
         modelTable.addColumn("Detalhes");
-        tableEmprestimo = new JTable(modelTable);
-        JScrollPane sp = new JScrollPane(tableEmprestimo);
+        tableAluno = new JTable(modelTable);
+        JScrollPane sp = new JScrollPane(tableAluno);
         sp.setBounds(50, 150, 980, 400);
         add(sp);
-
     }
 
-    public void realizarEmprestimo(){
+    public void cadastrarAluno(){
         JDialog dialog = new JDialog();
         dialog.setSize(350, 400);
         dialog.setLocationRelativeTo(this);
@@ -93,45 +100,27 @@ public class TelaEmprestimo extends JPanel {
         dialog.add(panelDialog);
 
         // Labels
-        JLabel lblEmprestimo = new JLabel("Empréstimo");
-        lblEmprestimo.setBounds(120, 20, 200, 27);
-        lblEmprestimo.setFont(new Font("Arial", Font.BOLD, 18));
-        panelDialog.add(lblEmprestimo);
-
-        JLabel lblCgmAluno = new JLabel("CGM: ");
-        lblCgmAluno.setBounds(20, 100, 100, 27);
-        panelDialog.add(lblCgmAluno);
+        JLabel lblAluno = new JLabel("ABC.Aluno");
+        lblAluno.setBounds(150, 20, 200, 27);
+        lblAluno.setFont(new Font("Arial", Font.BOLD, 18));
+        panelDialog.add(lblAluno);
 
         JLabel lblNomeAluno = new JLabel("Nome: ");
-        lblNomeAluno.setBounds(20, 150, 100, 27);
+        lblNomeAluno.setBounds(20, 100, 100, 27);
         panelDialog.add(lblNomeAluno);
 
-        JLabel lblCodigoLivro = new JLabel("Código: ");
-        lblCodigoLivro.setBounds(20, 200, 100, 27);
-        panelDialog.add(lblCodigoLivro);
-
-        JLabel lblNomeLivro = new JLabel("Livro: ");
-        lblNomeLivro.setBounds(20, 250, 100, 27);
-        panelDialog.add(lblNomeLivro);
+        JLabel lblCgmAluno = new JLabel("CGM: ");
+        lblCgmAluno.setBounds(20, 150, 100, 27);
+        panelDialog.add(lblCgmAluno);
 
         // Text Field
-        JTextField txtCgmAluno = new JtextFieldSomenteNumeros();
-        txtCgmAluno.setBounds(80, 100, 200, 27);
-        panelDialog.add(txtCgmAluno);
-
         JTextField txtNomeAluno = new JTextField();
-        txtNomeAluno.setBounds(80, 150, 200, 27);
-        txtNomeAluno.setEditable(false);
+        txtNomeAluno.setBounds(80, 100, 200, 27);
         panelDialog.add(txtNomeAluno);
 
-        JTextField txtCodigoLivro = new JTextField();
-        txtCodigoLivro.setBounds(80, 200, 200, 27);
-        panelDialog.add(txtCodigoLivro);
-
-        JTextField txtNomeLivro = new JTextField();
-        txtNomeLivro.setBounds(80, 250, 200, 27);
-        txtNomeLivro.setEditable(false);
-        panelDialog.add(txtNomeLivro);
+        JTextField txtCgmAluno = new JtextFieldSomenteNumeros();
+        txtCgmAluno.setBounds(80, 150, 200, 27);
+        panelDialog.add(txtCgmAluno);
 
         // Button
         JButton btnSalvar = new JButton("Salvar");
@@ -146,17 +135,17 @@ public class TelaEmprestimo extends JPanel {
         btnSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String nomeAluno = txtNomeAluno.getText().trim();
                 String cgmAluno = txtCgmAluno.getText().trim();
-                String codigoLivro = txtCodigoLivro.getText().trim();
 
-                if(codigoLivro.isEmpty() || cgmAluno.isEmpty()){
+                if(nomeAluno.isEmpty() || cgmAluno.isEmpty()){
                     JOptionPane.showMessageDialog( panelDialog,"Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                Emprestimo emprestimo = new Emprestimo(codigoLivro, cgmAluno);
+                Aluno aluno = new Aluno(nomeAluno, cgmAluno);
 
-                System.out.println("Código Livro: " + codigoLivro + "    CGM: " + cgmAluno + "    " + emprestimo); // --------> Tirar
+                System.out.println("Nome ABC.Aluno: " + nomeAluno + "    CGM: " + cgmAluno + "    " + aluno); // --------> Tirar
 
                 txtNomeAluno.setText("");
                 txtCgmAluno.setText("");
@@ -171,6 +160,5 @@ public class TelaEmprestimo extends JPanel {
         });
 
         dialog.setVisible(true);
-
     }
 }

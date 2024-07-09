@@ -1,10 +1,13 @@
+package Telas;
+
+import ABC.Livro;
+import JFrameEx.JFrameEx;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class TelaLivro extends JPanel {
 
@@ -14,12 +17,13 @@ public class TelaLivro extends JPanel {
     private JButton btnCadastrar;
     private JTable tableLivro;
     private DefaultTableModel modelTable;
+    private JFrameEx frame;
 
-    public TelaLivro(TelaLogin telaLogin) {
+    public TelaLivro(JFrameEx frame) {
         setLayout(null);
 
         // Labels
-        JLabel lblFuncionario = new JLabel("Livro");
+        JLabel lblFuncionario = new JLabel("ABC.Livro");
         lblFuncionario.setBounds(510, 50, 200, 27);
         lblFuncionario.setFont(new Font("Arial", Font.BOLD, 30));
         add(lblFuncionario);
@@ -58,7 +62,7 @@ public class TelaLivro extends JPanel {
         btnVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                telaLogin.trocarTela(TelaLogin.PRINCIPALPANEL);
+
             }
         });
 
@@ -70,10 +74,10 @@ public class TelaLivro extends JPanel {
         });
 
 
-        // Table Livro
+        // Table ABC.Livro
         modelTable = new DefaultTableModel();
         modelTable.addColumn("ID");
-        modelTable.addColumn("Livro");
+        modelTable.addColumn("ABC.Livro");
         modelTable.addColumn("Autor");
         modelTable.addColumn("Ano");
         modelTable.addColumn("Código");
@@ -98,12 +102,12 @@ public class TelaLivro extends JPanel {
         dialog.add(panelDialog);
 
         // Labels
-        JLabel lblLivro = new JLabel("Livro");
+        JLabel lblLivro = new JLabel("ABC.Livro");
         lblLivro.setBounds(140, 20, 200, 27);
         lblLivro.setFont(new Font("Arial", Font.BOLD, 18));
         panelDialog.add(lblLivro);
 
-        JLabel lblNomeLivro = new JLabel("Livro: ");
+        JLabel lblNomeLivro = new JLabel("ABC.Livro: ");
         lblNomeLivro.setBounds(20, 70, 100, 27);
         panelDialog.add(lblNomeLivro);
 
@@ -188,7 +192,7 @@ public class TelaLivro extends JPanel {
 
                 Livro livro = new Livro(nomeLivro, nomeAutor, anoLivro, codigoLivro, estanteLivro, prateleiraLivro, copiaLivro);
 
-                System.out.println("Nome Livro: " + nomeLivro + "    Nome Autor: " + nomeAutor + "  Codigo: " + codigoLivro + "     Copias: " + copiaLivro + "      " + livro); // --------> Tirar
+                System.out.println("Nome ABC.Livro: " + nomeLivro + "    Nome Autor: " + nomeAutor + "  Codigo: " + codigoLivro + "     Copias: " + copiaLivro + "      " + livro); // --------> Tirar
 
                 txtNomeLivro.setText("");
                 txtNomeAutor.setText("");

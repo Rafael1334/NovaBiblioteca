@@ -1,3 +1,8 @@
+package Telas;
+
+import ABC.Funcionario;
+import JFrameEx.JFrameEx;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -12,8 +17,9 @@ public class TelaFuncionario extends JPanel {
     private JButton btnCadastrar;
     private JTable tableFuncionario;
     private DefaultTableModel modelTable;
+    private JFrameEx frame;
 
-    public TelaFuncionario(TelaLogin telaLogin) {
+    public TelaFuncionario(JFrameEx frame) {
         setLayout(null);
 
         // Labels
@@ -56,7 +62,7 @@ public class TelaFuncionario extends JPanel {
         btnVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                telaLogin.trocarTela(TelaLogin.PRINCIPALPANEL);
+
             }
         });
 
@@ -66,7 +72,7 @@ public class TelaFuncionario extends JPanel {
         });
 
 
-        // Table Funcionario
+        // Table ABC.Funcionario
         modelTable = new DefaultTableModel();
         modelTable.addColumn("ID");
         modelTable.addColumn("Funcionário");

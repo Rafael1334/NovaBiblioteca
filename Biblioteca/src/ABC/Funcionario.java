@@ -1,3 +1,5 @@
+package ABC;
+
 public class Funcionario {
 
     private String nomeFuncionario;
